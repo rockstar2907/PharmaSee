@@ -1,0 +1,67 @@
+
+<div style="text-align:center;min-height:100vh;background-size:cover !important;background-attachment:fixed;background-image:url('/assets/bg1.jpg')" class="container-fluid">
+    <app-navbar></app-navbar>
+    <h1 class="display-3" style="color: white; font-weight:bolder">View Products</h1>
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+            <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseDiv" aria-expanded="false" aria-controls="collapseDiv"><i class="fa fa-plus-circle"></i>  Add Products</button>
+        </div>
+        
+        <div class="col-sm-6" >
+            <div>
+                <input type="text" style="height: calc(1.5em + .75rem + 2px);border-radius:0.25rem 0rem 0rem 0.25rem;border:none"  #searchProducts />
+              <button type="button" style="height: calc(1.5em + .75rem + 2px);border-radius:0rem 0.25rem 0.25rem 0rem;border:none" (click)="searchProduct(searchProducts.value)">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+        </div>  
+    </div>
+    <div class="collapse" id="collapseDiv">
+      
+        <div class="table-responsive">
+          <table class="table" style="border:5px solid rgba(220,230,242,1);" >
+            <tr style="background-color:rgba(220,230,242,1); font-size:12pt">
+              <th style="text-align:center;">Product Id</th>
+              <th style="text-align:center;">Product Name</th>
+              <th style="text-align:center;">Price</th>
+              <th style="text-align:center;">Expiry Date<span style="font-weight: lighter;">(YYYY-MM-DD)</span></th>
+              <th style="text-align:center;">Action</th>
+            </tr>
+            <tr style="background-color:white;text-align:center;font-size:12pt">
+              <td> <input type="text" class="form-control" #id> </td>
+              <td> <input type="text" class="form-control" #name> </td>
+              <td> <input type="number" class="form-control" #price> </td>
+              <td> <input type="date" class="form-control" #exp> </td>
+              <td> <button class="btn btn-success" (click)="addProduct(id.value,name.value,price.value,exp.value)"><i class="fa fa-plus-circle"></i></button> </td>
+            </tr>    
+          </table>
+        </div>
+      
+    </div>
+    <br />
+    <div class="table-responsive">
+      <table class="table" style="border:5px solid rgba(220,230,242,1);" >
+        <tr style="background-color:rgba(220,230,242,1); font-size:12pt">
+          <th style="text-align:center;">Product Id</th>
+          <th style="text-align:center;">Product Name</th>
+          <th style="text-align:center;">Price</th>
+          <th style="text-align:center;">Expiry Date</th>
+          <th style="text-align:center;">Action</th>
+        </tr>
+        <tr *ngFor="let product of filteredProducts" style="background-color:white;text-align:center;font-size:12pt">
+          <td> {{product.productId }} </td>
+          <td> {{product.productName}} </td>
+          <td> {{product.price}} </td>
+          <td> {{product.expiryDate|date:"fullDate"}} </td>
+          <td> <button class="btn btn-danger" (click)="deleteProduct(product.productId)"><i class="fa fa-trash"></i></button> </td>
+        </tr>
+             
+    </table>
+    </div>
+    <div *ngIf="showMsg">
+      <h4 class="jumbotron" style="text-align:center;">No products available</h4>
+    </div>
+    
+  </div>
+  

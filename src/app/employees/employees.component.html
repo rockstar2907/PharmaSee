@@ -1,0 +1,64 @@
+
+<div style="text-align:center;min-height:100vh;background-size:cover !important;background-attachment:fixed;background-image:url('/assets/bg1.jpg')" class="container-fluid">
+    <app-navbar></app-navbar>
+    <h1 class="display-3" style="color: white; font-weight:bolder">View Employees</h1>
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseDiv" aria-expanded="false" aria-controls="collapseDiv"><i class="fa fa-plus-circle"></i>  Add Employee</button>
+        </div>
+        <div class="col-sm-6">
+            <div>
+                <input type="text" style="height: calc(1.5em + .75rem + 2px);border-radius:0.25rem 0rem 0rem 0.25rem;border:none"  #searchemployees />
+              <button type="button" style="height: calc(1.5em + .75rem + 2px);border-radius:0rem 0.25rem 0.25rem 0rem;border:none" (click)="searchEmployee(searchemployees.value)">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+        </div>
+    </div>
+    <div class="collapse" id="collapseDiv">
+      
+      <div class="table-responsive">
+        <table class="table" style="border:5px solid rgba(220,230,242,1);" >
+          <tr style="background-color:rgba(220,230,242,1); font-size:12pt">
+            <th style="text-align:center;">Employee Id</th>
+            <th style="text-align:center;">Employee Name</th>
+            <th style="text-align:center;">Date Of Birth</th>
+            <th style="text-align:center;">Phone Number</th>
+            <th style="text-align:center;">Action</th>
+          </tr>
+          <tr style="background-color:white;text-align:center;font-size:12pt">
+            <td> <input type="text" class="form-control" #id> </td>
+            <td> <input type="text" class="form-control" #name> </td>
+            <td> <input type="date" class="form-control" #dob> </td>
+            <td> <input type="number" class="form-control" #phn> </td>
+            <td> <button class="btn btn-success" (click)="addEmployee(id.value,name.value,dob.value,phn.value)"><i class="fa fa-plus-circle"></i></button> </td>
+          </tr>    
+        </table>
+      </div>
+    </div>
+    <br />
+    <div class="table-responsive">
+      <table class="table" style="border:5px solid rgba(220,230,242,1);" >
+        <tr style="background-color:rgba(220,230,242,1); font-size:12pt">
+          <th style="text-align:center;">Employee Id</th>
+          <th style="text-align:center;">Employee Name</th>
+          <th style="text-align:center;">Date Of Birth</th>
+          <th style="text-align:center;">Phone Number</th>
+          <th style="text-align:center;">Action</th>
+        </tr>
+        <tr *ngFor="let employee of filteredemployees" style="background-color:white;text-align:center;font-size:12pt">
+          <td> {{employee.empId }} </td>
+          <td> {{employee.empName}} </td>
+          <td> {{employee.DOB|date:"fullDate"}} </td>
+          <td> {{employee.phone}} </td>
+          <td> <button class="btn btn-danger" (click)="deleteEmployee(employee.empId)"><i class="fa fa-trash"></i></button> </td>
+        </tr>    
+    </table>
+    </div>
+    <div *ngIf="showMsg">
+      <h4 class="jumbotron" style="text-align:center;">No employees available</h4>
+    </div>
+    
+  </div>
+  
